@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
  * @author Andrii Sysoiev
  */
 public class AlgorithmsImpl implements Algorithms {
+
     @Override
     public String sortOddAndEvenNumbers(String src) {
         int[] arr = Arrays.stream(src.split(" "))
@@ -14,7 +15,7 @@ public class AlgorithmsImpl implements Algorithms {
                 .mapToInt(Integer::parseInt)
                 .toArray();
 
-        sortOddAndEvenNumbers(arr);
+        sortOddAndEvenNumbersSingleWhile(arr);
 
         String result = Arrays.stream(arr)
                 .mapToObj(String::valueOf)
@@ -22,16 +23,20 @@ public class AlgorithmsImpl implements Algorithms {
         return result;
     }
 
-    private void sortOddAndEvenNumbers(int[] arr) {
-        boolean sorted = false;
+    private void sortOddAndEvenNumbersSingleWhile(int[] arr) {
         int tmp;
-        //even
+        boolean sorted = false;
         while (!sorted) {
+            System.out.println("while");
             sorted = true;
             for (int i = 0; i < arr.length - 1; i++) {
+                System.out.println("forI");
                 if (arr[i] % 2 == 0) {
+                    //search next even item
                     for (int j = i + 1; j < arr.length; j++) {
+                        System.out.println("forJ");
                         if (arr[j] % 2 == 0) {
+                            //compare, swap
                             if (arr[i] < arr[j]) {
                                 tmp = arr[j];
                                 arr[j] = arr[i];
@@ -41,18 +46,12 @@ public class AlgorithmsImpl implements Algorithms {
                             break;
                         }
                     }
-                }
-            }
-        }
-
-        //odd
-        sorted = false;
-        while (!sorted) {
-            sorted = true;
-            for (int i = 0; i < arr.length - 1; i++) {
-                if (arr[i] % 2 != 0) {
+                } else {
+                    //search next odd item
                     for (int j = i + 1; j < arr.length; j++) {
+                        System.out.println("forJ");
                         if (arr[j] % 2 != 0) {
+                            //compare, swap
                             if (arr[i] > arr[j]) {
                                 tmp = arr[j];
                                 arr[j] = arr[i];
