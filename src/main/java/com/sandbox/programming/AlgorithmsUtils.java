@@ -6,10 +6,9 @@ import java.util.stream.Collectors;
 /**
  * @author Andrii Sysoiev
  */
-public class AlgorithmsImpl implements Algorithms {
+public final class AlgorithmsUtils {
 
-    @Override
-    public String sortOddAndEvenNumbers(String src) {
+    public static String sortOddAndEvenNumbers(String src) {
         int[] arr = Arrays.stream(src.split(" "))
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
@@ -23,7 +22,7 @@ public class AlgorithmsImpl implements Algorithms {
         return result;
     }
 
-    private void sortOddAndEvenNumbersSingleWhile(int[] arr) {
+    private static void sortOddAndEvenNumbersSingleWhile(int[] arr) {
         int tmp;
         boolean sorted = false;
         while (!sorted) {
@@ -64,6 +63,18 @@ public class AlgorithmsImpl implements Algorithms {
                 }
             }
         }
+    }
+
+    public static String reverseString(String input) {
+        byte[] result = input.getBytes();
+        int i = 0;
+        int j = result.length - 1;
+        do {
+            byte charI = result[i];
+            result[i++] = result[j];
+            result[j--] = charI;
+        } while (i < j);
+        return new String(result);
     }
 
 }
